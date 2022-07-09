@@ -3,11 +3,9 @@ import java.io.IOException;
 public class Main {
 
     public static void main(String[] args) throws IOException {
-        Workers.addEmp();
-        Workers.addEmp();
+        Processing processing = new Processing();
 
-        Workers.print();
+        processing.start();
 
-        Workers.fis.close();
     }
 }
