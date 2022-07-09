@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Processing {
-    static int count = 1;
+    int count = 0;
 
     static String fileName = "Employees.txt";
     static FileInputStream fis;
@@ -22,7 +22,7 @@ public class Processing {
 
     public void start () throws IOException {
         choice();
-        enter(br.readLine());
+        enter(choiceBr.readLine());
     }
 
     private void enter (String string) throws IOException {
@@ -50,11 +50,11 @@ public class Processing {
                 break;
             case "5":
                 System.out.println("---Введите номер сотрудника, тип которого хотите изменить. Затем введите желаемый новый тип---" + "\n");
-                employees.set (Integer.parseInt(choiceBr.readLine()), new Workers.Employee(choiceBr.readLine(), br.readLine(), br.readLine(), br.readLine()));
+                employees.set ((Integer.parseInt(choiceBr.readLine())), new Workers.Employee(choiceBr.readLine(), br.readLine(), br.readLine(), br.readLine()));
                 print();
                 break;
         }
-        enter(br.readLine());
+        enter(choiceBr.readLine());
     }
 
     private void choice(){

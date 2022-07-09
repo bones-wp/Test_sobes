@@ -1,5 +1,3 @@
-import java.io.*;
-
 public class Workers {
     String type, fio, dateBorn, dateWork;
 
@@ -30,7 +28,7 @@ public class Workers {
 
     @Override
     public String toString() {
-        return "\n" + Processing.count + "\n" + type + "\n" + fio + "\n" + dateBorn + "\n" + dateWork;
+        return "\n" +  "\n" + type + "\n" + fio + "\n" + dateBorn + "\n" + dateWork;
     }
 
 
