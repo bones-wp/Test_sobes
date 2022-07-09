@@ -2,11 +2,10 @@ import java.io.*;
 import java.util.ArrayList;
 
 public class Workers {
-    String fio, dateBorn, dateWork;
+    String type, fio, dateBorn, dateWork;
 
-    static String fileName = "Form.txt";
+    static String fileName = "Employees.txt";
     static FileInputStream fis;
-
     static {
         try {
             fis = new FileInputStream(fileName);
@@ -18,57 +17,54 @@ public class Workers {
     static BufferedReader br = new BufferedReader(new InputStreamReader(fis));
 
     static ArrayList<Employee> employees = new ArrayList<>();
+    static ArrayList<Employee> subordinates = new ArrayList<>();
 
-    public static void add() throws IOException {
+
+    public static void addEmp() throws IOException {
         int count = 0;
         count = count++;
-
-        employees.add(count, new Employee(br.readLine(), br.readLine(), br.readLine()));
-        fis.close();
+        employees.add(count, new Employee("Работник", br.readLine(), br.readLine(), br.readLine()));
     }
 
     public static void print() {
-        System.out.println('\n' + "Список сотрудников: " + '\n');
+        System.out.println("Список сотрудников: ");
         for (Workers a : employees) {
             System.out.println(a);
         }
-
     }
 
-    public Workers(String fio, String dateBorn, String dateWork) throws FileNotFoundException {
+    public Workers(String type, String fio, String dateBorn, String dateWork) throws FileNotFoundException {
+        this.type = type;
         this.fio = fio;
         this.dateBorn = dateBorn;
         this.dateWork = dateWork;
     }
 
     static class Employee extends Workers {
-        public Employee(String fio, String dateBorn, String dateWork) throws FileNotFoundException {
-            super(fio, dateBorn, dateWork);
+        public Employee(String type, String fio, String dateBorn, String dateWork) throws FileNotFoundException {
+            super(type , fio, dateBorn, dateWork);
         }
-
-        @Override
-        public String toString() {
-            return fio + "\n" + dateBorn + "\n" + dateWork;
-        }
-
     }
 
     static class Manager extends Workers {
-        ArrayList<Employee> subordinates = new ArrayList<>();
-
-        public Manager(String fio, String dateBorn, String dateWork) throws FileNotFoundException {
-            super(fio, dateBorn, dateWork);
-            this.subordinates = subordinates;
+        public Manager(String type, String fio, String dateBorn, String dateWork) throws FileNotFoundException {
+            super(type, fio, dateBorn, dateWork);
         }
     }
 
     static class Others extends Workers {
         String anketa;
 
-        public Others(String fio, String dateBorn, String dateWork) throws FileNotFoundException {
-            super(fio, dateBorn, dateWork);
+        public Others(String type, String fio, String dateBorn, String dateWork) throws FileNotFoundException {
+            super(type, fio, dateBorn, dateWork);
             this.anketa = anketa;
         }
     }
+
+    @Override
+    public String toString() {
+        return "\n" + type + "\n" + fio + "\n" + dateBorn + "\n" + dateWork;
+    }
+
 
 }
