@@ -1,4 +1,3 @@
-import java.io.*;
 import java.util.ArrayList;
 
 public class Workers {
@@ -8,12 +7,19 @@ public class Workers {
         this.fio = fio;
         this.dateBorn = dateBorn;
         this.dateWork = dateWork;
+
+
     }
 
     static class Employee extends Workers {
         public Employee(String fio, String dateBorn, String dateWork) {
             super(fio, dateBorn, dateWork);
         }
+        @Override
+        public String toString(){
+            return fio + "\n" + dateBorn + "\n" + dateWork ;
+        }
+
     }
 
     static class Manager extends Workers {
