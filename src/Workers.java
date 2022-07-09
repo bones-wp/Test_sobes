@@ -53,11 +53,8 @@ public class Workers {
     }
 
     static class Others extends Workers {
-        String anketa;
-
         public Others(String type, String fio, String dateBorn, String dateWork) throws FileNotFoundException {
             super(type, fio, dateBorn, dateWork);
-            this.anketa = anketa;
         }
     }
 
