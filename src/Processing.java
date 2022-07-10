@@ -17,8 +17,7 @@ public class Processing {
     static BufferedReader br = new BufferedReader(new InputStreamReader(fis));
     private BufferedReader choiceBr = new BufferedReader(new InputStreamReader(System.in));
 
-    static ArrayList<Workers.Employee> employees = new ArrayList<>();
-    static ArrayList<Workers.Employee> subordinates = new ArrayList<>();
+    static ArrayList<Workers> employees = new ArrayList<>();
 
     public void start () throws IOException {
         choice();
@@ -29,17 +28,17 @@ public class Processing {
 
         switch (string) {
             case "1":
-                employees.add(count, new Workers.Employee("Работник", br.readLine(), br.readLine(), br.readLine()));
+                employees.add(count, new Workers (br.readLine(), br.readLine(), br.readLine()));
                 count++;
                 print();
                 break;
             case "2":
-                employees.add(count, new Workers.Employee("Менеджер", br.readLine(), br.readLine(), br.readLine()));
+                employees.add(count, new Workers.Manager (br.readLine(), br.readLine(), br.readLine()));
                 count++;
                 print();
                 break;
             case "3":
-                employees.add(count, new Workers.Employee("Руководитель", br.readLine(), br.readLine(), br.readLine()));
+                employees.add(count, new Workers.Others (br.readLine(), br.readLine(), br.readLine()));
                 count++;
                 print();
                 break;
@@ -50,7 +49,7 @@ public class Processing {
                 break;
             case "5":
                 System.out.println("---Введите номер сотрудника, тип которого хотите изменить. Затем введите желаемый новый тип---" + "\n");
-                employees.set ((Integer.parseInt(choiceBr.readLine())), new Workers.Employee(choiceBr.readLine(), br.readLine(), br.readLine(), br.readLine()));
+                employees.set ((Integer.parseInt(choiceBr.readLine())), new Workers (br.readLine(), br.readLine(), br.readLine()));
                 print();
                 break;
         }
