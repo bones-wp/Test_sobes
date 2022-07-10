@@ -62,7 +62,7 @@ public class Processing {
                 }
             case "toManager":
                 int f = (choiceBr.nextInt() - 1);
-                Workers.Manager.subordinates.addAll(f, employees);
+                Workers.Manager.subordinates.add(employees.get(f));
                 printSub();
                 break;
 
