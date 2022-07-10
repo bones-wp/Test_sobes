@@ -2,7 +2,7 @@ import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 
 public class Workers {
-    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("yyyy MM dd");
+    private final DateTimeFormatter dateFormatter = DateTimeFormatter.ofPattern("dd.MM.yyyy");
 
     String fio;
     LocalDate dateBorn, dateWork;
