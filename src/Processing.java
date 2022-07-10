@@ -6,21 +6,17 @@ import java.util.Scanner;
 
 public class Processing {
 
-    static String fileName = "Employees.txt";
-    static FileInputStream fis;
+    String fileName = "Employees.txt";
+    FileInputStream fis = new FileInputStream(fileName);
 
-    static {
-        try {
-            fis = new FileInputStream(fileName);
-        } catch (FileNotFoundException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
-    static BufferedReader br = new BufferedReader(new InputStreamReader(fis));
+    BufferedReader br = new BufferedReader(new InputStreamReader(fis));
     private Scanner choiceBr = new Scanner(System.in);
 
-    static ArrayList<Workers> employees = new ArrayList<>();
+    ArrayList<Workers> employees = new ArrayList<Workers>();
+
+    public Processing() throws FileNotFoundException {
+    }
 
     public void start() throws IOException {
         choice();
@@ -34,37 +30,59 @@ public class Processing {
                 employees.add(new Workers(br.readLine(), br.readLine(), br.readLine()));
                 break;
             case "addManager":
-                employees.add(new Workers.Manager(br.readLine(), br.readLine(), br.readLine()));
+                employees.add(new Manager(br.readLine(), br.readLine(), br.readLine()));
                 break;
             case "addOther":
-                employees.add(new Workers.Others(br.readLine(), br.readLine(), br.readLine()));
+                employees.add(new Others(br.readLine(), br.readLine(), br.readLine(), br.readLine()));
                 break;
             case "delWorker":
                 System.out.println("---Введите номер по порядку сотрудника, которого хотите удалить---" + "\n");
                 employees.remove(choiceBr.nextInt() - 1);
                 break;
             case "replace":
-                System.out.println("Введите номер по порядку сотрудника, тип которого хотите изменить. Затем введите желаемый новый тип: " +
-                        "\n" + "-- 1 -- --- Рабочий" + "\n" + "-- 2 -- --- Менеджер" + "\n" + "-- 3 -- --- Другое" + "\n");
+                System.out.println("Введите номер по порядку сотрудника, тип которого хотите изменить: " );
 
                 int j = (choiceBr.nextInt() - 1);
+
+                System.out.println("Введите кем он будет теперь: "+
+                        "\n" + "-- 1 -- --- Рабочий" + "\n" + "-- 2 -- --- Менеджер" + "\n" + "-- 3 -- --- Другое" + "\n");
                 int k = (choiceBr.nextInt());
+                Workers worker = employees.get(j);
                 switch (k) {
                     case 1:
-                        employees.set(j, (Workers) employees.get(j));
+                        Workers newWorker = new Workers();
+                        newWorker.setFio(worker.fio);
+                        newWorker.setDateBorn(worker.dateBorn);
+                        newWorker.setDateWork(worker.dateWork);
+                        employees.remove(j);
+                        employees.add(newWorker);
                         break;
                     case 2:
-                        employees.set(j, (Workers.Manager) employees.get(j));
+                        Manager manager = new Manager();
+                        manager.setFio(worker.fio);
+                        manager.setDateBorn(worker.dateBorn);
+                        manager.setDateWork(worker.dateWork);
+                        employees.remove(j);
+                        employees.add(manager);
                         break;
                     case 3:
-                        employees.set(j, (Workers.Others) employees.get(j));
+                        Others other = new Others();
+                        other.setFio(worker.fio);
+                        other.setDateBorn(worker.dateBorn);
+                        other.setDateWork(worker.dateWork);
+                        System.out.println("Введите описание сотрудника: ");
+                        String line = choiceBr.nextLine();
+                        other.setText(line);
+                        employees.remove(j);
+                        employees.add(other);
                         break;
                 }
             case "toManager":
                 System.out.println("Введите номер по порядку сотрудника, которого хотите добавить в подчинение к менеджеру ");
                 int f = (choiceBr.nextInt() - 1);
-                Workers.Manager.subordinates.add((Workers.Manager) employees.get(f));
-                printSub();
+                Manager manager = new Manager();
+                manager.addWorker(employees.get(f));
+                manager.printSub();
                 break;
 
             case "print":
@@ -100,7 +118,6 @@ public class Processing {
                 }
             }
             enter(choiceBr.next());
-
     }
 
         private void choice () {
@@ -110,18 +127,13 @@ public class Processing {
                     "Распечатать список всех сотрудников -> print \n");
         }
 
-        public static void print () {
+        public void print () {
             System.out.println("Список сотрудников: ");
             for (Workers a : employees) {
                 System.out.println(a);
             }
         }
-        public static void printSub () {
-        System.out.println("Список сотрудников в подчиненнии менеджера: ");
-        for (Workers a : Workers.Manager.subordinates) {
-            System.out.println(a);
-        }
-    }
-
-
 }
+
+
+
