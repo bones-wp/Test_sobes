@@ -32,20 +32,16 @@ public class Processing {
         switch (string) {
             case "addWorker":
                 employees.add(new Workers(br.readLine(), br.readLine(), br.readLine()));
-                print();
                 break;
             case "addManager":
                 employees.add(new Workers.Manager(br.readLine(), br.readLine(), br.readLine()));
-                print();
                 break;
             case "addOther":
                 employees.add(new Workers.Others(br.readLine(), br.readLine(), br.readLine()));
-                print();
                 break;
             case "delWorker":
                 System.out.println("---Введите номер по порядку сотрудника, которого хотите удалить---" + "\n");
                 employees.remove(choiceBr.nextInt() - 1);
-                print();
                 break;
             case "replace":
                 System.out.println("Введите номер по порядку сотрудника, тип которого хотите изменить. Затем введите желаемый новый тип: " +
@@ -55,7 +51,7 @@ public class Processing {
                 int k = (choiceBr.nextInt());
                 switch (k) {
                     case 1:
-                        employees.set(j, new Workers(" ", " ", " "));
+                        //Collections.replaceAll (employees, getClass(), new Workers());
                         break;
                     case 2:
                         employees.set(j, new Workers.Manager(" ", " ", " "));
@@ -66,8 +62,12 @@ public class Processing {
                 }
             case "toManager":
                 int f = (choiceBr.nextInt() - 1);
-                employees.addAll(f, Workers.Manager.subordinates);
+                Workers.Manager.subordinates.addAll(f, employees);
                 printSub();
+                break;
+
+            case "print":
+                print();
                 break;
 
             case "sort":
