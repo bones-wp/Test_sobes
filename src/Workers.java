@@ -10,14 +10,10 @@ public class Workers {
     }
 
     static class Manager extends Workers {
-        static ArrayList<Workers> subordinates = new ArrayList<>();
+        static ArrayList<Manager> subordinates = new ArrayList<>();
         public Manager(String fio, String dateBorn, String dateWork) {
             super(fio, dateBorn, dateWork);
         }
-        public static void addSub (int i, Workers w){
-            subordinates.add(i, w);
-        }
-
     }
 
     static class Others extends Workers {
