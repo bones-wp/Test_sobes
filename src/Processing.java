@@ -1,8 +1,8 @@
 import java.io.*;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Processing {
-    int count = 0;
 
     static String fileName = "Employees.txt";
     static FileInputStream fis;
@@ -15,45 +15,55 @@ public class Processing {
     }
 
     static BufferedReader br = new BufferedReader(new InputStreamReader(fis));
-    private BufferedReader choiceBr = new BufferedReader(new InputStreamReader(System.in));
+    private Scanner choiceBr = new Scanner(System.in);
 
     static ArrayList<Workers> employees = new ArrayList<>();
 
     public void start () throws IOException {
         choice();
-        enter(choiceBr.readLine());
+        enter(choiceBr.next());
     }
 
     private void enter (String string) throws IOException {
 
         switch (string) {
             case "1":
-                employees.add(count, new Workers (br.readLine(), br.readLine(), br.readLine()));
-                count++;
+                employees.add(new Workers (br.readLine(), br.readLine(), br.readLine()));
                 print();
                 break;
             case "2":
-                employees.add(count, new Workers.Manager (br.readLine(), br.readLine(), br.readLine()));
-                count++;
+                employees.add(new Workers.Manager (br.readLine(), br.readLine(), br.readLine()));
                 print();
                 break;
             case "3":
-                employees.add(count, new Workers.Others (br.readLine(), br.readLine(), br.readLine()));
-                count++;
+                employees.add(new Workers.Others (br.readLine(), br.readLine(), br.readLine()));
                 print();
                 break;
             case "4":
-                System.out.println("---Введите номер сотрудника, которого хотите удалить---"+ "\n");
-                employees.remove (Integer.parseInt(choiceBr.readLine()));
+                System.out.println("---Введите номер по порядку сотрудника, которого хотите удалить---"+ "\n");
+                employees.remove (choiceBr.nextInt() - 1);
                 print();
                 break;
             case "5":
-                System.out.println("---Введите номер сотрудника, тип которого хотите изменить. Затем введите желаемый новый тип---" + "\n");
-                employees.set ((Integer.parseInt(choiceBr.readLine())), new Workers (br.readLine(), br.readLine(), br.readLine()));
+                System.out.println("Введите номер по порядку сотрудника, тип которого хотите изменить. Затем введите желаемый новый тип: " +
+                        "\n" + "-- 1 -- --- Рабочий" + "\n" + "-- 2 -- --- Менеджер" + "\n" + "-- 3 -- --- Другое" + "\n");
+
+                int j = (choiceBr.nextInt() - 1);
+                int k = (choiceBr.nextInt());
+                switch (k){
+                    case 1:
+                        employees.set (j, new Workers(" ", " ", " "));
+                    case 2:
+                        employees.set (j, new Workers.Manager(" ", " ", " "));
+                    case 3:
+                        employees.set (j, new Workers.Others (" ", " ", " "));
+                }
                 print();
                 break;
+            case "6":
+                Workers.Manager.addSub((choiceBr.nextInt() - 1), );
         }
-        enter(choiceBr.readLine());
+        enter(choiceBr.next());
     }
 
     private void choice(){
