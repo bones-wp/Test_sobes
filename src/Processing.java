@@ -51,16 +51,17 @@ public class Processing {
                 int k = (choiceBr.nextInt());
                 switch (k) {
                     case 1:
-                        //Collections.replaceAll (employees, getClass(), new Workers());
+                        employees.set(j, (Workers) employees.get(j));
                         break;
                     case 2:
-                        employees.set(j, new Workers.Manager(" ", " ", " "));
+                        employees.set(j, (Workers.Manager) employees.get(j));
                         break;
                     case 3:
-                        employees.set(j, new Workers.Others(" ", " ", " "));
+                        employees.set(j, (Workers.Others) employees.get(j));
                         break;
                 }
             case "toManager":
+                System.out.println("Введите номер по порядку сотрудника, которого хотите добавить в подчинение к менеджеру ");
                 int f = (choiceBr.nextInt() - 1);
                 Workers.Manager.subordinates.add((Workers.Manager) employees.get(f));
                 printSub();
@@ -105,7 +106,8 @@ public class Processing {
         private void choice () {
             System.out.println("Что Вы хотите сделать? \n" + "Добавить работника -> addWorker \n" + "Добавить Менеджера -> addManager \n" +
                     "Добавить другого сотрудника -> addOther \n" + "Удалить сотрудника - delWorker \n" + "Изменить тип сотрудника -> replace \n"
-                    + "Привязать сотрудника к менеджеру - toManager\n" + "Сортировать список по фамилиям, датам принятия на работу -> sort \n");
+                    + "Привязать сотрудника к менеджеру - toManager \n" + "Сортировать список по фамилиям, датам принятия на работу -> sort \n" +
+                    "Распечатать список всех сотрудников -> print \n");
         }
 
         public static void print () {
