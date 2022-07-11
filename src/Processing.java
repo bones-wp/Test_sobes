@@ -28,12 +28,15 @@ public class Processing {
         switch (string) {
             case "addWorker":
                 employees.add(new Workers(br.readLine(), br.readLine(), br.readLine()));
+                System.out.println("Работник добавлен");
                 break;
             case "addManager":
                 employees.add(new Manager(br.readLine(), br.readLine(), br.readLine()));
+                System.out.println("Менеджер добавлен");
                 break;
             case "addOther":
                 employees.add(new Others(br.readLine(), br.readLine(), br.readLine(), br.readLine()));
+                System.out.println("Сотрудник добавлен");
                 break;
             case "delWorker":
                 System.out.println("---Введите номер по порядку сотрудника, которого хотите удалить---" + "\n");
@@ -43,11 +46,11 @@ public class Processing {
                 System.out.println("Введите номер по порядку сотрудника, тип которого хотите изменить: " );
 
                 int j = (choiceBr.nextInt() - 1);
+                Workers worker = employees.get(j);
 
                 System.out.println("Введите кем он будет теперь: "+
                         "\n" + "-- 1 -- --- Рабочий" + "\n" + "-- 2 -- --- Менеджер" + "\n" + "-- 3 -- --- Другое" + "\n");
                 int k = (choiceBr.nextInt());
-                Workers worker = employees.get(j);
                 switch (k) {
                     case 1:
                         Workers newWorker = new Workers();
@@ -78,11 +81,22 @@ public class Processing {
                         break;
                 }
             case "toManager":
-                System.out.println("Введите номер по порядку сотрудника, которого хотите добавить в подчинение к менеджеру ");
+                System.out.println("Введите номер по порядку сотрудника - менеджера, которому хотите добавить в подчинение людей: ");
                 int f = (choiceBr.nextInt() - 1);
-                Manager manager = new Manager();
-                manager.addWorker(employees.get(f));
-                manager.printSub();
+                Workers oldManager = employees.get(f);
+
+                Manager newManager = new Manager();
+                newManager.setFio(oldManager.fio);
+                newManager.setDateBorn(oldManager.dateBorn);
+                newManager.setDateWork(oldManager.dateWork);
+                employees.remove(f);
+
+                System.out.println("Введите номер по порядку сотрудника, которого хотите добавить в подчинение к менеджеру: ");
+                int s = (choiceBr.nextInt() - 1);
+                newManager.addWorker(employees.get(s));
+                employees.add(newManager);
+
+                newManager.printSub();
                 break;
 
             case "print":

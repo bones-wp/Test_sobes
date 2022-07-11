@@ -20,7 +20,7 @@ public class Manager extends Workers {
                 + "Дата принятия на работу: " + dateWork + "\n" + "Список подчинённых сотрудников: " + subordinates;
     }
     public void printSub () {
-        System.out.println("Список сотрудников в подчиненнии менеджера: ");
+        System.out.println("Список сотрудников в подчинении менеджера: ");
         for (Workers a : subordinates) {
             System.out.println(a);
         }
