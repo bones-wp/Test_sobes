@@ -110,23 +110,25 @@ public class Processing {
                 int l = (choiceBr.nextInt());
                 switch (l) {
                     case 1:
-                        Comparator<Workers> compareByFIO = new Comparator<Workers>() {
-                            @Override
-                            public int compare(Workers o1, Workers o2) {
-                                return o1.fio.compareTo(o2.fio);
-                            }
-                        };
-                        Collections.sort(employees, compareByFIO);
+                        employees.sort(((o1, o2) -> o1.fio.compareTo(o2.fio)));
+
+                        //employees.sort(new Comparator<Workers>() {
+                         //   @Override
+                            //public int compare(Workers o1, Workers o2) {
+                            //    return o1.fio.compareTo(o2.fio);
+                            //}
+                        //});
                         print();
                         break;
                     case 2:
-                        Comparator<Workers> compareByDate = new Comparator<Workers>() {
-                            @Override
-                            public int compare(Workers o1, Workers o2) {
-                                return o1.dateWork.compareTo(o2.dateWork);
-                            }
-                        };
-                        Collections.sort(employees, compareByDate);
+                        employees.sort(((o1, o2) -> o1.dateWork.compareTo(o2.dateWork)));
+
+                        //employees.sort(new Comparator<Workers>() {
+                            //@Override
+                            //public int compare(Workers o1, Workers o2) {
+                                //return o1.dateWork.compareTo(o2.dateWork);
+                            //}
+                        //});
                         print();
                         break;
                 }
